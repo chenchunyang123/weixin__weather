@@ -13,7 +13,15 @@ Page({
     // 风向
     wind_dir: '',
     // 风速
-    wind_spd: ''
+    wind_spd: '',
+    // 能见度
+    vis: '',
+    // 空气质量
+    qlty: '',
+    // 日出时间
+    sr: '',
+    // 日落时间
+    ss: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -30,7 +38,31 @@ Page({
           update: result.update.loc,
           cond_txt: result.now.cond_txt,
           wind_dir: result.now.wind_dir,
-          wind_spd: result.now.wind_spd
+          wind_spd: result.now.wind_spd,
+          vis: result.now.vis
+        })
+      }
+    })
+    // 空气质量
+    wx.request({
+      url: 'https://free-api.heweather.com/s6/air/now?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
+      success: res => {
+        var result = res.data.HeWeather6[0];
+        console.log(result)
+        this.setData({
+          qlty: result.air_now_city.qlty
+        })
+      }
+    })
+    // 日出日落时间
+    wx.request({
+      url: 'https://free-api.heweather.com/s6/solar/sunrise-sunset?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
+      success: res => {
+        var result = res.data.HeWeather6[0];
+        console.log(result)
+        this.setData({
+          sr: result.sunrise_sunset["0"].sr,
+          ss: result.sunrise_sunset["0"].ss
         })
       }
     })

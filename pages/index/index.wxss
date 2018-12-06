@@ -59,7 +59,7 @@ page {
   width: 50%;
 }
 #content .living swiper swiper-item view text:nth-of-type(1) {
-  font-size: 28rpx;
+  font-size: 22rpx;
   color: #aaa;
 }
 #content .living swiper swiper-item view text:nth-of-type(2) {
@@ -68,7 +68,7 @@ page {
 }
 #content .index_of_life {
   box-sizing: border-box;
-  padding: 18rpx 20rpx;
+  padding: 18rpx 46rpx;
   width: 100%;
   height: 220rpx;
   border: 1px solid black;
@@ -77,7 +77,6 @@ page {
   margin-bottom: 20rpx;
 }
 #content .index_of_life swiper {
-  width: 100%;
   height: 100%;
 }
 #content .index_of_life swiper view:nth-child(1) {

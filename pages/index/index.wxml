@@ -20,9 +20,26 @@
           <text>{{wind_spd}}km/h</text>
         </view>
         <view class='wrap'>
-          <image src='/images/wind_dir.png' mode='widthFix'></image>
-          <text>风向</text>
-          <text>{{wind_dir}}</text>
+          <image src='/images/vis.png' mode='widthFix'></image>
+          <text>能见度</text>
+          <text>{{vis}}公里</text>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class='wrap'>
+          <image src='/images/qlty.png' mode='widthFix'></image>
+          <text>空气质量</text>
+          <text>{{qlty}}</text>
+        </view>
+        <view class='wrap'>
+          <image src='/images/sr.png' mode='widthFix'></image>
+          <text>日出</text>
+          <text>{{sr}}</text>
+        </view>
+        <view class='wrap'>
+          <image src='/images/ss.png' mode='widthFix'></image>
+          <text>日落</text>
+          <text>{{ss}}</text>
         </view>
       </swiper-item>
     </swiper>
