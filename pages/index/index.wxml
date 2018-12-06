@@ -1,0 +1,73 @@
+<view id='header'>
+  <view class='degree_now'>{{degree_now}}°</view>
+  <view class='cond_txt'>{{cond_txt}}</view>
+  <view class='degree_between'>更新于{{update}}</view>
+</view>
+
+<view id='content'>
+  <!-- 实况天气数据 -->
+  <view class='living'>
+    <swiper circular='true'>
+      <swiper-item>
+        <view class='wrap'>
+          <image src='/images/wind_dir.png' mode='widthFix'></image>
+          <text>风向</text>
+          <text>{{wind_dir}}</text>
+        </view>
+        <view class='wrap'>
+          <image src='/images/wind_spd.png' mode='widthFix'></image>
+          <text>风速</text>
+          <text>{{wind_spd}}km/h</text>
+        </view>
+        <view class='wrap'>
+          <image src='/images/wind_dir.png' mode='widthFix'></image>
+          <text>风向</text>
+          <text>{{wind_dir}}</text>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 生活指数 -->
+  <view class='index_of_life'>
+    <swiper>
+      <swiper-item>
+        <view>舒适度指数</view>
+        <view>各项气象条件适宜，无明显降温过程，发生感冒机率较低。</view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
+
+<!-- 未来3天天气 -->
+<view id='footer'>
+  <swiper>
+    <swiper-item>
+      <view class='title'>3日预报</view>
+      <view class='wrap'>
+        <view class='detail'>
+          <view>周六</view>
+          <view>12/06</view>
+          <image src='/weather_icon/100.png'></image>
+          <text decode='true'>4°/&nbsp;5°</text>
+          <view>天气</view>
+        </view>
+        <view class='detail'>
+          <view>周六</view>
+          <view>12/06</view>
+          <image src='/weather_icon/100.png'></image>
+          <text decode='true'>4°/&nbsp;5°</text>
+          <view>天气</view>
+        </view>
+        <view class='detail'>
+          <view>周六</view>
+          <view>12/06</view>
+          <image src='/weather_icon/100.png'></image>
+          <text decode='true'>4°/&nbsp;5°</text>
+          <view>天气</view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>
+
+<i-divider content="数据由和风天气支持"></i-divider>
