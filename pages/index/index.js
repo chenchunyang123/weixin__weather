@@ -21,7 +21,16 @@ Page({
     // 日出时间
     sr: '',
     // 日落时间
-    ss: ''
+    ss: '',
+    // 各种指数
+    comf: '',
+    cw: '',
+    drsg: '',
+    flu: '',
+    sport: '',
+    trav: '',
+    uv: '',
+    air: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -31,7 +40,7 @@ Page({
     wx.request({
       url: 'https://free-api.heweather.com/s6/weather/now?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
       success: res => {
-        var result = res.data.HeWeather6[0];
+        let result = res.data.HeWeather6[0];
         console.log(res.data.HeWeather6[0])
         this.setData({
           degree_now: result.now.fl,
@@ -47,7 +56,7 @@ Page({
     wx.request({
       url: 'https://free-api.heweather.com/s6/air/now?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
       success: res => {
-        var result = res.data.HeWeather6[0];
+        let result = res.data.HeWeather6[0];
         console.log(result)
         this.setData({
           qlty: result.air_now_city.qlty
@@ -58,11 +67,29 @@ Page({
     wx.request({
       url: 'https://free-api.heweather.com/s6/solar/sunrise-sunset?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
       success: res => {
-        var result = res.data.HeWeather6[0];
+        let result = res.data.HeWeather6[0];
         console.log(result)
         this.setData({
           sr: result.sunrise_sunset["0"].sr,
           ss: result.sunrise_sunset["0"].ss
+        })
+      }
+    })
+    // 生活指数
+    wx.request({
+      url: 'https://free-api.heweather.com/s6/weather/lifestyle?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
+      success: res => {
+        let result = res.data.HeWeather6[0].lifestyle;
+        console.log(result);
+        this.setData({
+          comf: result[0].txt,
+          cw: result[6].txt,
+          drsg: result[1].txt,
+          flu: result[2].txt,
+          sport: result[3].txt,
+          trav: result[4].txt,
+          uv: result[5].txt,
+          air: result[7].txt
         })
       }
     })

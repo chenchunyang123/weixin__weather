@@ -7,7 +7,7 @@
 <view id='content'>
   <!-- 实况天气数据 -->
   <view class='living'>
-    <swiper circular='true'>
+    <swiper circular='true' autoplay='true' interval='4000' duration='1000'>
       <swiper-item>
         <view class='wrap'>
           <image src='/images/wind_dir.png' mode='widthFix'></image>
@@ -46,10 +46,38 @@
   </view>
   <!-- 生活指数 -->
   <view class='index_of_life'>
-    <swiper>
+    <swiper circular='true'>
       <swiper-item>
         <view>舒适度指数</view>
-        <view>各项气象条件适宜，无明显降温过程，发生感冒机率较低。</view>
+        <view>{{comf}}</view>
+      </swiper-item>
+      <swiper-item>
+        <view>洗车指数</view>
+        <view>{{cw}}</view>
+      </swiper-item>
+      <swiper-item>
+        <view>穿衣指数</view>
+        <view>{{drsg}}</view>
+      </swiper-item>
+      <swiper-item>
+        <view>感冒指数</view>
+        <view>{{flu}}</view>
+      </swiper-item>
+      <swiper-item>
+        <view>运动指数</view>
+        <view>{{sport}}</view>
+      </swiper-item>
+      <swiper-item>
+        <view>旅游指数</view>
+        <view>{{trav}}</view>
+      </swiper-item>
+      <swiper-item>
+        <view>紫外线指数</view>
+        <view>{{uv}}</view>
+      </swiper-item>
+      <swiper-item>
+        <view>空气污染扩散条件指数</view>
+        <view>{{air}}</view>
       </swiper-item>
     </swiper>
   </view>
