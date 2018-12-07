@@ -1,6 +1,6 @@
 <view id='header'>
-  <view class='degree_now'>{{degree_now}}°</view>
-  <view class='cond_txt'>{{cond_txt}}</view>
+  <view class='degree_now'>{{tmp}}°</view>
+  <view class='fl'>体感温度:{{fl}}°</view>
   <view class='degree_between'>更新于{{update}}</view>
 </view>
 
@@ -89,26 +89,12 @@
     <swiper-item>
       <view class='title'>3日预报</view>
       <view class='wrap'>
-        <view class='detail'>
-          <view>周六</view>
-          <view>12/06</view>
-          <image src='/weather_icon/100.png'></image>
-          <text decode='true'>4°/&nbsp;5°</text>
-          <view>天气</view>
-        </view>
-        <view class='detail'>
-          <view>周六</view>
-          <view>12/06</view>
-          <image src='/weather_icon/100.png'></image>
-          <text decode='true'>4°/&nbsp;5°</text>
-          <view>天气</view>
-        </view>
-        <view class='detail'>
-          <view>周六</view>
-          <view>12/06</view>
-          <image src='/weather_icon/100.png'></image>
-          <text decode='true'>4°/&nbsp;5°</text>
-          <view>天气</view>
+        <view class='detail' wx:for='{{future}}' wx:key='{{index}}'>
+          <view>{{date[index].week}}</view>
+          <view>{{date[index].time}}</view>
+          <image src='/weather_icon/{{future[index].cond_code_d}}.png'></image>
+          <text decode='true'>{{future[index].tmp_min}}°/&nbsp;{{future[index].tmp_max}}°</text>
+          <view>{{future[index].cond_txt_d}}</view>
         </view>
       </view>
     </swiper-item>

@@ -5,7 +5,9 @@ Page({
    */
   data: {
     // 当前体感温度
-    degree_now: '',
+    fl: '',
+    // 当前温度
+    tmp: '',
     // 更新时间
     update: '',
     // 当前天气状况
@@ -30,7 +32,12 @@ Page({
     sport: '',
     trav: '',
     uv: '',
-    air: ''
+    air: '',
+    // 未来三天预报
+    // 第一天
+    future: '',
+    // 存储日期
+    date: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -43,12 +50,13 @@ Page({
         let result = res.data.HeWeather6[0];
         console.log(res.data.HeWeather6[0])
         this.setData({
-          degree_now: result.now.fl,
+          fl: result.now.fl,
           update: result.update.loc,
           cond_txt: result.now.cond_txt,
           wind_dir: result.now.wind_dir,
           wind_spd: result.now.wind_spd,
-          vis: result.now.vis
+          vis: result.now.vis,
+          tmp: result.now.tmp
         })
       }
     })
@@ -56,10 +64,10 @@ Page({
     wx.request({
       url: 'https://free-api.heweather.com/s6/air/now?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
       success: res => {
-        let result = res.data.HeWeather6[0];
+        let result = res.data.HeWeather6[0].air_now_city;
         console.log(result)
         this.setData({
-          qlty: result.air_now_city.qlty
+          qlty: result.qlty
         })
       }
     })
@@ -67,11 +75,11 @@ Page({
     wx.request({
       url: 'https://free-api.heweather.com/s6/solar/sunrise-sunset?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
       success: res => {
-        let result = res.data.HeWeather6[0];
+        let result = res.data.HeWeather6[0].sunrise_sunset["0"];
         console.log(result)
         this.setData({
-          sr: result.sunrise_sunset["0"].sr,
-          ss: result.sunrise_sunset["0"].ss
+          sr: result.sr,
+          ss: result.ss
         })
       }
     })
@@ -93,6 +101,25 @@ Page({
         })
       }
     })
+    // 未来三天天气
+    wx.request({
+      url: 'https://free-api.heweather.com/s6/weather/forecast?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
+      success: res => {
+        let result = res.data.HeWeather6[0].daily_forecast;
+        console.log(result);
+        this.setData({
+          future: result
+        })
+      }
+    })
+    // 三天的时间计算
+    let util = require('../../utils/util.js');
+    let time = util.formatDate(new Date());
+    let date = util.getDates(7, time);
+      console.log(date.slice(0, 3))
+    this.setData({
+      date: date.slice(0,3)
+    })
   },
 
   /**
@@ -106,7 +133,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
