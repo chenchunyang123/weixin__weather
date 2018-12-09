@@ -5,10 +5,10 @@
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "像素天气",
-    "backgroundColor": "#eeeeee",
+    "navigationBarTitleText": "黑框天气",
+    "backgroundColor": "#eee",
     "backgroundTextStyle": "light",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": true
   },
   "usingComponents": {
     "i-divider": "./dist/divider/index"

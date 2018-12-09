@@ -10,27 +10,45 @@ page {
   background-color: #fff;
   margin-bottom: 20rpx;
   position: relative;
-  box-sizing: border-box;
 }
 #header .fl {
   position: absolute;
-  bottom: 136rpx;
-  left: 160rpx;
+  bottom: 86rpx;
+  right: 30rpx;
   font-size: 28rpx;
   color: #ccc;
 }
-#header .degree_now {
+/* #header .degree_now {
   position: absolute;
   bottom: 120rpx;
-  left: 30rpx;
+  right: 30rpx;
   font-size: 100rpx;
+} */
+#header .degree_now {
+  position: absolute;
+  bottom: 122rpx;
+  right: 200rpx;
+  font-size: 200rpx;
 }
 #header .degree_between {
   color: #999;
   position: absolute;
-  bottom: 50rpx;
-  left: 30rpx;
+  bottom: 30rpx;
+  right: 20rpx;
   font-size: 26rpx;
+}
+#header .location_img {
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 14rpx;
+}
+#header .location_txt {
+  position: absolute;
+  left: 100rpx;
+  top: 20rpx;
+  color: #555;
 }
 #content .living {
   width: 100%;

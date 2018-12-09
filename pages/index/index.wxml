@@ -2,6 +2,8 @@
   <view class='degree_now'>{{tmp}}°</view>
   <view class='fl'>体感温度:{{fl}}°</view>
   <view class='degree_between'>更新于{{update}}</view>
+  <image class='location_img' src='../../images/location.png'></image>
+  <text class='location_txt'>{{city}}·{{location}}</text>
 </view>
 
 <view id='content'>

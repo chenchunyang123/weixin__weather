@@ -1,3 +1,6 @@
+// 获取weather函数
+var weather = require('../../utils/weather.js');
+
 Page({
 
   /**
@@ -37,96 +40,67 @@ Page({
     // 第一天
     future: '',
     // 存储日期
-    date: ''
+    date: '',
+    // 地理位置
+    city: '',
+    location: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 实况天气
-    wx.request({
-      url: 'https://free-api.heweather.com/s6/weather/now?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
+    // 获取位置
+    wx.getLocation({
+      type: 'gcj02',
       success: res => {
-        let result = res.data.HeWeather6[0];
-        console.log(res.data.HeWeather6[0])
-        this.setData({
-          fl: result.now.fl,
-          update: result.update.loc,
-          cond_txt: result.now.cond_txt,
-          wind_dir: result.now.wind_dir,
-          wind_spd: result.now.wind_spd,
-          vis: result.now.vis,
-          tmp: result.now.tmp
+        const latitude = res.latitude;
+        const longitude = res.longitude;
+        // 成功获取位置后发送请求
+        wx.request({
+          url: `https://search.heweather.com/find?location=${longitude},${latitude}&key=33369e365fe84eb68876f52a2ae51cca`,
+          success: res => {
+            console.log(res.data.HeWeather6["0"].basic["0"])
+            // 城市代码
+            const id = res.data.HeWeather6["0"].basic["0"].cid;
+            // 母城市
+            const city = res.data.HeWeather6["0"].basic["0"].parent_city;
+            // 子地区
+            const location = res.data.HeWeather6["0"].basic["0"].location; 
+            // set到地址显示
+            this.setData({
+              city,
+              location
+            })    
+            // 三天的时间计算
+            let util = require('../../utils/util.js');
+            let time = util.formatDate(new Date());
+            let date = util.getDates(7, time);
+              console.log(date.slice(0, 3))
+            this.setData({
+              date: date.slice(0,3)
+            })
+            weather(id, city, this);
+          }
+        })
+      },
+      fail: res => {
+        console.log('获取位置失败');
+        wx.showToast({
+          title: '失败',
+          icon: 'fail',
+          duration: 2000
         })
       }
-    })
-    // 空气质量
-    wx.request({
-      url: 'https://free-api.heweather.com/s6/air/now?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
-      success: res => {
-        let result = res.data.HeWeather6[0].air_now_city;
-        console.log(result)
-        this.setData({
-          qlty: result.qlty
-        })
-      }
-    })
-    // 日出日落时间
-    wx.request({
-      url: 'https://free-api.heweather.com/s6/solar/sunrise-sunset?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
-      success: res => {
-        let result = res.data.HeWeather6[0].sunrise_sunset["0"];
-        console.log(result)
-        this.setData({
-          sr: result.sr,
-          ss: result.ss
-        })
-      }
-    })
-    // 生活指数
-    wx.request({
-      url: 'https://free-api.heweather.com/s6/weather/lifestyle?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
-      success: res => {
-        let result = res.data.HeWeather6[0].lifestyle;
-        console.log(result);
-        this.setData({
-          comf: result[0].txt,
-          cw: result[6].txt,
-          drsg: result[1].txt,
-          flu: result[2].txt,
-          sport: result[3].txt,
-          trav: result[4].txt,
-          uv: result[5].txt,
-          air: result[7].txt
-        })
-      }
-    })
-    // 未来三天天气
-    wx.request({
-      url: 'https://free-api.heweather.com/s6/weather/forecast?location=北京&key=33369e365fe84eb68876f52a2ae51cca',
-      success: res => {
-        let result = res.data.HeWeather6[0].daily_forecast;
-        console.log(result);
-        this.setData({
-          future: result
-        })
-      }
-    })
-    // 三天的时间计算
-    let util = require('../../utils/util.js');
-    let time = util.formatDate(new Date());
-    let date = util.getDates(7, time);
-      console.log(date.slice(0, 3))
-    this.setData({
-      date: date.slice(0,3)
     })
   },
 
+ 
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
