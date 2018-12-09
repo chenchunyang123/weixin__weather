@@ -13,7 +13,7 @@ var weather = function(id, city, traget) {
         wind_dir: result.now.wind_dir,
         wind_spd: result.now.wind_spd,
         vis: result.now.vis,
-        tmp: result.now.tmp
+        tmp: result.now.tmp,
       })
     }
   })
@@ -24,7 +24,7 @@ var weather = function(id, city, traget) {
       let result = res.data.HeWeather6[0].air_now_city;
       console.log(result)
       traget.setData({
-        qlty: result.qlty
+        qlty: result.qlty,
       })
     }
   })
@@ -36,7 +36,7 @@ var weather = function(id, city, traget) {
       console.log(result)
       traget.setData({
         sr: result.sr,
-        ss: result.ss
+        ss: result.ss,
       })
     }
   })
@@ -54,7 +54,7 @@ var weather = function(id, city, traget) {
         sport: result[3].txt,
         trav: result[4].txt,
         uv: result[5].txt,
-        air: result[7].txt
+        air: result[7].txt,
       })
     }
   })
@@ -65,7 +65,7 @@ var weather = function(id, city, traget) {
       let result = res.data.HeWeather6[0].daily_forecast;
       console.log(result);
       traget.setData({
-        future: result
+        future: result,
       })
     }
   })

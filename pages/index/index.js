@@ -43,12 +43,17 @@ Page({
     date: '',
     // 地理位置
     city: '',
-    location: ''
+    location: '',
+    // 判断是否渲染主界面
+    complete: true
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '等等我~',
+    })
     // 获取位置
     wx.getLocation({
       type: 'gcj02',
@@ -69,7 +74,7 @@ Page({
             // set到地址显示
             this.setData({
               city,
-              location
+              location,
             })    
             // 三天的时间计算
             let util = require('../../utils/util.js');
@@ -79,16 +84,20 @@ Page({
             this.setData({
               date: date.slice(0,3)
             })
-            weather(id, city, this);
+            // 获取各种天气参数
+            // weather(id, city, this);
+            // 加载完关闭loading
+            var isOver = this.data;
+            wx.hideLoading();
           }
         })
       },
       fail: res => {
         console.log('获取位置失败');
-        wx.showToast({
-          title: '失败',
-          icon: 'fail',
-          duration: 2000
+        // 加载失败了先关闭loading，再显示提示
+        wx.hideLoading();
+        this.setData({
+          complete: ''
         })
       }
     })

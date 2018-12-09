@@ -145,3 +145,19 @@ page {
   justify-content: space-between;
   color: #999;  
 }
+
+/* 获取地理信息失败时候的样式 */
+.tips {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 350rpx;
+  height: 350rpx;
+  border: 1px solid black;
+  border-radius: 30rpx;
+  line-height: 2;
+  padding: 30rpx;
+  box-sizing: border-box;
+  font-size: 36rpx;
+}
