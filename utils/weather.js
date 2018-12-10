@@ -1,5 +1,5 @@
 // 天气请求函数(城市id，城市名称，this小程序对象)
-var weather = function(id, city, traget) {
+let weather = function(id, city, traget) {
   // 实况天气
   wx.request({
     url: `https://free-api.heweather.com/s6/weather/now?location=${id}&key=33369e365fe84eb68876f52a2ae51cca`,

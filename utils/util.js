@@ -13,8 +13,8 @@ const formatNumber = n => {
 //todate默认参数是当前日期，可以传入对应时间 todate格式为10-05
 function getDates(days, todate) {
   var dateArry = [];
-  for (var i = 0; i < days; i++) {
-    var dateObj = dateLater(todate, i);
+  for (let i = 0; i < days; i++) {
+    let dateObj = dateLater(todate, i);
     dateArry.push(dateObj)
   }
   return dateArry;

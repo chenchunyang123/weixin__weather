@@ -1,5 +1,7 @@
 // 获取weather函数
 var weather = require('../../utils/weather.js');
+// 获取地理位置函数
+var location = require('../../utils/location.js')
 
 Page({
 
@@ -54,53 +56,8 @@ Page({
     wx.showLoading({
       title: '等等我~',
     })
-    // 获取位置
-    wx.getLocation({
-      type: 'gcj02',
-      success: res => {
-        const latitude = res.latitude;
-        const longitude = res.longitude;
-        // 成功获取位置后发送请求
-        wx.request({
-          url: `https://search.heweather.com/find?location=${longitude},${latitude}&key=33369e365fe84eb68876f52a2ae51cca`,
-          success: res => {
-            console.log(res.data.HeWeather6["0"].basic["0"])
-            // 城市代码
-            const id = res.data.HeWeather6["0"].basic["0"].cid;
-            // 母城市
-            const city = res.data.HeWeather6["0"].basic["0"].parent_city;
-            // 子地区
-            const location = res.data.HeWeather6["0"].basic["0"].location; 
-            // set到地址显示
-            this.setData({
-              city,
-              location,
-            })    
-            // 三天的时间计算
-            let util = require('../../utils/util.js');
-            let time = util.formatDate(new Date());
-            let date = util.getDates(7, time);
-              console.log(date.slice(0, 3))
-            this.setData({
-              date: date.slice(0,3)
-            })
-            // 获取各种天气参数
-            // weather(id, city, this);
-            // 加载完关闭loading
-            var isOver = this.data;
-            wx.hideLoading();
-          }
-        })
-      },
-      fail: res => {
-        console.log('获取位置失败');
-        // 加载失败了先关闭loading，再显示提示
-        wx.hideLoading();
-        this.setData({
-          complete: ''
-        })
-      }
-    })
+    // 获取地点和天气的函数
+    location(this);
   },
 
  
@@ -137,7 +94,18 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    // 下拉刷新重新获取天气数据
+    if(!this.data.complete) {
+      wx.showLoading({
+        title: '确认打开了哦~',
+      })
+    }else {
+      wx.showLoading({
+        title: '正在刷新~',
+      })
+    }
+    location(this);  
+    setTimeout(wx.stopPullDownRefresh, 2000);
   },
 
   /**

@@ -1,10 +1,11 @@
-<view wx:if="{{complete}}">
+<view hidden="{{!complete}}">
   <view id='header'>
     <view class='degree_now'>{{tmp}}°</view>
     <view class='fl'>体感温度:{{fl}}°</view>
     <view class='degree_between'>更新于{{update}}</view>
     <image class='location_img' src='../../images/location.png'></image>
-    <text class='location_txt'>{{city}}·{{location}}</text>
+    <text class='location_txt_1'>{{city}}</text>
+    <text class='location_txt_2' hidden="{{city === location? location: ''}}">·{{location}}</text>
   </view>
 
   <view id='content'>
@@ -49,7 +50,7 @@
     </view>
     <!-- 生活指数 -->
     <view class='index_of_life'>
-      <swiper circular='true'>
+      <swiper circular='true' autoplay='true' interval='5500' duration='1000'>
         <swiper-item>
           <view>舒适度指数</view>
           <view>{{comf}}</view>
@@ -107,6 +108,6 @@
   <i-divider content="数据由和风天气支持"></i-divider>
 </view>
 
-<view wx:if="{{!complete}}">
-  <view class='tips'>请确认已经打开了位置信息哦!打开后,下拉刷新重试~~</view>
+<view hidden="{{complete}}">
+  <view class='tips'>请确认已经打开了位置信息哦！打开后,下拉刷新重试~~</view>
 </view>

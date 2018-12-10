@@ -18,12 +18,6 @@ page {
   font-size: 28rpx;
   color: #ccc;
 }
-/* #header .degree_now {
-  position: absolute;
-  bottom: 120rpx;
-  right: 30rpx;
-  font-size: 100rpx;
-} */
 #header .degree_now {
   position: absolute;
   bottom: 122rpx;
@@ -44,9 +38,15 @@ page {
   left: 30rpx;
   top: 14rpx;
 }
-#header .location_txt {
+#header .location_txt_1 {
   position: absolute;
   left: 100rpx;
+  top: 20rpx;
+  color: #555;
+}
+#header .location_txt_2 {
+  position: absolute;
+  left: 160rpx;
   top: 20rpx;
   color: #555;
 }
